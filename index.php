@@ -50,9 +50,8 @@ function format_price($price) {
     $price = ceil($price);
     if ($price < 1000) {
         return $price . " ₽";
-    } else {
-        return number_format($price, 0, '', ' ') . " ₽"; 
     }
+    return number_format($price, 0, '', ' ') . " ₽";
 }
 
 ?>
