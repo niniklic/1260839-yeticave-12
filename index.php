@@ -47,14 +47,12 @@ $advertList = [
 ];
 
 function format_price($price) {
-    $price_string = "";
     $price = ceil($price);
     if ($price < 1000) {
-        $price_string = $price;
+        return $price . " ₽";
     } else {
-        $price_string = number_format($price, 0, '', ' '); 
+        return number_format($price, 0, '', ' ') . " ₽"; 
     }
-    return $price_string . " ₽";
 }
 
 ?>
