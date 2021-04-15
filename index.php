@@ -62,8 +62,7 @@ $pageContent = include_template('../templates/main.php', [
 ]);
 
 $layoutContent = include_template('../templates/layout.php', [
-    'pageContent' => $pageContent,
-    'advertList' => $advertList,
+    'pageContent' => $pageContent,    
     'categoryList' => $categoryList,
     'user_name' => $user_name,
     'pageTitle' => 'Главная',
