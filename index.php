@@ -1,9 +1,9 @@
 <?php
 require_once('helpers.php');
 
-$is_auth = rand(0, 1);
+$isAuth = rand(0, 1);
 
-$user_name = 'Nina';
+$userName = 'Nina';
 
 $categoryList = [
     'Доски и лыжи', 'Крепления', 'Ботинки', 'Одежда', 'Инструменты', 'Разное'
@@ -64,9 +64,9 @@ $pageContent = include_template('../templates/main.php', [
 $layoutContent = include_template('../templates/layout.php', [
     'pageContent' => $pageContent,    
     'categoryList' => $categoryList,
-    'user_name' => $user_name,
+    'userName' => $userName,
     'pageTitle' => 'Главная',
-    'is_auth' => $is_auth    
+    'isAuth' => $isAuth    
 ]);
 
 print($layoutContent);

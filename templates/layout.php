@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title><?=$pageTitle; ?></title>
+    <title><?= $pageTitle ?></title>
     <link href="../css/normalize.min.css" rel="stylesheet">
     <link href="../css/style.css" rel="stylesheet">
 </head>
@@ -22,9 +22,9 @@
         <a class="main-header__add-lot button" href="pages/add-lot.html">Добавить лот</a>
 
         <nav class="user-menu">
-          <?php if($is_auth == 1): ?>
+          <?php if($isAuth == 1): ?>
           <div class="user-menu__logged">
-            <p><?=$user_name; ?></p>
+            <p><?= $userName ?></p>
             <a class="user-menu__bets" href="pages/my-bets.html">Мои ставки</a>
             <a class="user-menu__logout" href="#">Выход</a>
           </div>
@@ -43,16 +43,16 @@
 </header>
 
 <main class="container">
-    <?=$pageContent; ?>
+    <?= $pageContent ?>
 </main>
 </div>
 
 <footer class="main-footer">
     <nav class="nav">
         <ul class="nav__list container">
-            <?php foreach ($categoryList as $key => $val): ?>
+            <?php foreach ($categoryList as $key => $category): ?>
             <li class="nav__item">
-                <a href="pages/all-lots.html"><?=htmlspecialchars($val); ?></a>
+                <a href="pages/all-lots.html"><?=htmlspecialchars($category) ?></a>
             </li>
             <?php endforeach; ?>
         </ul>
