@@ -50,7 +50,7 @@ $advertList = [
     'category' => 'Разное',
     'price' => 5400,
     'url' => 'img/lot-6.jpg',
-    'expireDate'=> '2021-06-15'
+    'expireDate'=> '2021-06-16'
     ]
 ];
 
@@ -63,18 +63,21 @@ function format_price($price) {
 }
 
 function time_left($expire_date) {
-    $diffDate = date_create($expire_date)->getTimestamp() - date_create(date("Y-m-d h:i"))->getTimestamp();
-    if ($diffDate <= 0) {
-        $leftTimeArray = [ 'hours' => 0, 
-                           'minutes' => 0
-                         ];
+    $date_now = date_create(date("Y-m-d h:i"));
+    $diffTime = date_diff($date_now, date_create($expire_date));
+
+
+    $leftTime = [ 'hours' => 0, 
+                  'minutes' => 0
+                ];
+
+    if ($diffTime->format('%r') == '') {
+        $leftTime = [ 'hours' => $diffTime->format('%a') * 24 + $diffTime->format('%h'), 
+                      'minutes' => $diffTime->format('%i')
+                    ];    
     }
-    else {
-        $leftTimeArray = [  'hours' => (int) ($diffDate / 3600), 
-                            'minutes' => (int) ($diffDate % 3600 / 60)
-                         ];    
-    }
-    return $leftTimeArray;
+
+    return $leftTime;
 }
 
 $pageContent = include_template('../templates/main.php', [
