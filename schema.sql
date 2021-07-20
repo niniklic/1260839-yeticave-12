@@ -9,7 +9,7 @@ CREATE TABLE user (
   reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   email VARCHAR(128) NOT NULL UNIQUE,
   name VARCHAR(128) NOT NULL,
-  password CHAR(64) NOT NULL,
+  password VARCHAR(600) NOT NULL,
   contact_info VARCHAR(400)
 );
 
@@ -34,7 +34,7 @@ CREATE TABLE lot (
   price_step INT NOT NULL,
   id_category INT NOT NULL,
   id_creator INT NOT NULL,
-  id_winner INT NOT NULL,
+  id_winner INT,
   
   CONSTRAINT fk_lot_category 
   FOREIGN KEY (id_category) REFERENCES category (id),
