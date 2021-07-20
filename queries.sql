@@ -1,5 +1,9 @@
 USE yeticave;
 
+/* ------------------------------- */
+/*         INSERT                  */          
+/* ------------------------------- */
+
 /* заполняем таблицу категорий заданными значениями */
 INSERT INTO category (name, code)
 VALUES 
@@ -19,6 +23,7 @@ VALUES
       ('mail_user2@mail.com', 'Che', 'pass2', 'tel. +222'),
       ('mail_user3@mail.com', 'Utah', 'pass3', 'tel. +333'),
       ('mail_user4@mail.com', 'Norma', 'pass4', 'tel. +444');
+
 
 /* заполняем таблицу лотов заданными объявлениями (победителя не указываем) */
 INSERT INTO lot (date_create, name, description, image, price_initial, 
@@ -42,3 +47,41 @@ VALUES
       (11299, 1, 1),
       (11399, 1, 4),
       (161499, 2, 3);
+
+
+/* ------------------------------- */
+/*         SELECT и UPDATE         */          
+/* ------------------------------- */
+
+/* выбираем все категории */
+SELECT * FROM category;
+
+
+/* выбираем самые новые, открытые лоты. Выбираем поля: название, стартовую цену, ссылку на изображение, 
+   цену (не ясно, какую, поэтому сейчас берём наивысшую предложенную ставку по данному лоту),
+   название категории */
+SELECT lot.name, lot.price_initial, lot.image, max(bet.price_proposal), cat.name   
+	FROM lot JOIN category cat ON cat.id = lot.id_category
+	LEFT JOIN bet ON bet.id_lot = lot.id
+	WHERE lot.date_final > CURRENT_TIMESTAMP 
+	GROUP BY lot.id	
+	ORDER BY lot.date_create desc;
+
+
+/* выбираем лот по его ID, а также название категории, к которой принадлежит лот */
+SELECT lot.*, cat.name
+	FROM lot JOIN category cat ON cat.id = lot.id_category
+	WHERE lot.id = 2;
+
+
+/* обновляем лот по его ID */
+UPDATE lot SET NAME = 'Обновленное название сноуборда'
+	WHERE lot.id = 1;
+
+
+/* выбираем список ставок для лота по его идентификатору с сортировкой по дате*/
+SELECT bet.*  
+	FROM lot LEFT JOIN bet ON bet.id_lot = lot.id
+	WHERE lot.id = 1 
+	GROUP BY lot.id	
+	ORDER BY bet.date_create desc;
