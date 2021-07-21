@@ -82,6 +82,5 @@ UPDATE lot SET NAME = 'Обновленное название сноуборд�
 /* выбираем список ставок для лота по его идентификатору с сортировкой по дате*/
 SELECT bet.*  
 	FROM lot LEFT JOIN bet ON bet.id_lot = lot.id
-	WHERE lot.id = 1 
-	GROUP BY lot.id	
+	WHERE lot.id = 1	
 	ORDER BY bet.date_create desc;
